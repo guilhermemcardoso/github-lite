@@ -26,7 +26,6 @@ function Search() {
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
-		console.log('USERS', users);
 	}, [users]);
 
 	const handleSearch = () => {
@@ -37,7 +36,7 @@ function Search() {
 	};
 
 	const handleItemClick = (userId) => {
-		navigate(`/users/${userId}`);
+		navigate(`users/${userId}`);
 	};
 
 	const handlePreviousPage = () => {
