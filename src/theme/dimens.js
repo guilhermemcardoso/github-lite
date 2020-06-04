@@ -13,3 +13,7 @@ export const margin_xl = 24;
 export const font_title = 24;
 export const font_subtitle = 18;
 export const font_content = 14;
+export const font_details = 12;
+export const font_badge = 10;
+
+export const border_radius = 4;
