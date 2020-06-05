@@ -35,8 +35,8 @@ function Search() {
 		dispatch(Actions.searchUser(query, 1));
 	};
 
-	const handleItemClick = (userId) => {
-		navigate(`users/${userId}`);
+	const handleItemClick = (user) => {
+		navigate(`users/${user}`);
 	};
 
 	const handlePreviousPage = () => {

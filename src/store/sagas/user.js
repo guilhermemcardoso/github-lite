@@ -21,10 +21,10 @@ export function* searchUser({ payload }) {
 		data.items.map((item, index) => {
 			userRequests.push(api.get(`/users/${data.items[index].login}`));
 		});
-		
+
 		const userResponses = yield call(axios.all, userRequests);
 		const users = [];
-		userResponses.map(response => {
+		userResponses.map((response) => {
 			users.push(response.data);
 		});
 
@@ -43,5 +43,7 @@ export function* searchUser({ payload }) {
 }
 
 export default function* rootSaga() {
-	yield all([takeLatest(Types.SEARCH_USER_REQUEST, searchUser)]);
+	yield all([
+		takeLatest(Types.SEARCH_USER_REQUEST, searchUser)
+	]);
 }

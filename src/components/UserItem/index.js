@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 
 function UserItem({ user, onClick, ...rest }) {
 	const handleClick = () => {
-		onClick(user.id);
+		onClick(user.login);
 	};
 
 	return (

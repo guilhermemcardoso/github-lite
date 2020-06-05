@@ -1,38 +1,50 @@
 const INITIAL_STATE = {
-    loading: false,
-    repo: [],
-  };
-  
-  export const Types = {
-    GET_REPO_REQUEST: 'GET_REPO_REQUEST',
-    GET_REPO_SUCCESS: 'GET_REPO_SUCCESS',
-    GET_REPO_ERROR: 'GET_REPO_ERROR'
-  };
-  
-  export const Actions = {
-    getRepo: (data) => ({
-      type: Types.GET_REPO_REQUEST,
-      payload: {data},
-    }),
-    getRepoSuccess: (data) => ({
-      type: Types.GET_REPO_SUCCESS,
-      payload: {data},
-    }),
-    getRepoError: () => ({
-      type: Types.GET_REPO_ERROR,
-    })
-  };
-  
-  export default function (state = INITIAL_STATE, action) {
-    switch (action.type) {
-      case Types.GET_REPO_REQUEST:
-        return {...state, loading: true};
-      case Types.GET_REPO_SUCCESS:
-        return {...state, repo: action.payload.data, loading: false};
-      case Types.GET_REPO_ERROR:
-        return {...state, loading: false};
-      default:
-        return state;
-    }
-  }
-  
+	loading: false,
+  repos: [],
+  currentRepo: null,
+  currentUser: null
+};
+
+export const Types = {
+
+	GET_USER_REPOS_REQUEST: 'GET_USER_REPOS_REQUEST',
+	GET_USER_REPOS_SUCCESS: 'GET_USER_REPOS_SUCCESS',
+	GET_USER_REPOS_ERROR: 'GET_USER_REPOS_ERROR',
+};
+
+export const Actions = {
+	
+	getUserRepos: (user, page, sort) => ({
+		type: Types.GET_USER_REPOS_REQUEST,
+		payload: { user, page, sort },
+	}),
+	getUserReposSuccess: (repos, hasPrevious, hasNext, user) => ({
+		type: Types.GET_USER_REPOS_SUCCESS,
+		payload: { repos, hasPrevious, hasNext, user },
+	}),
+	getUserReposError: () => ({
+		type: Types.GET_USER_REPOS_ERROR,
+	}),
+};
+
+export default function (state = INITIAL_STATE, action) {
+	switch (action.type) {
+		
+		case Types.GET_USER_REPOS_REQUEST:
+			return { ...state, loading: true };
+		case Types.GET_USER_REPOS_SUCCESS:
+			return {
+        ...state,
+        repos: action.payload.repos,
+        hasPrevious: action.payload.hasPrevious,
+        hasNext: action.payload.hasNext,
+        currentUser: action.payload.user,
+				loading: false
+			};
+		case Types.GET_USER_REPOS_ERROR:
+			return { ...state, loading: false };
+
+		default:
+			return state;
+	}
+}

@@ -13,8 +13,8 @@ function MainRoutes() {
     return (
         <Routes>
             <Route path="github-lite/" element={<Search />} />
-            <Route path="github-lite/users/:userId" element={<User />} />
-            <Route path="github-lite/repos/:userId/:repoId" element={<Repo />} />
+            <Route path="github-lite/users/:user" element={<User />} />
+            <Route path="github-lite/users/:user/:repo" element={<Repo />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );

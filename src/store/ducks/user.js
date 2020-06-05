@@ -10,6 +10,10 @@ export const Types = {
 	SEARCH_USER_REQUEST: 'SEARCH_USER_REQUEST',
 	SEARCH_USER_SUCCESS: 'SEARCH_USER_SUCCESS',
 	SEARCH_USER_ERROR: 'SEARCH_USER_ERROR',
+
+	SET_CURRENT_USER_REQUEST: 'SET_CURRENT_USER_REQUEST',
+	SET_CURRENT_USER_SUCCESS: 'SET_CURRENT_USER_SUCCESS',
+	SET_CURRENT_USER_ERROR: 'SET_CURRENT_USER_ERROR',
 };
 
 export const Actions = {
@@ -41,6 +45,7 @@ export default function (state = INITIAL_STATE, action) {
 			};
 		case Types.SEARCH_USER_ERROR:
 			return { ...state, loading: false };
+
 		default:
 			return state;
 	}

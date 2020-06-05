@@ -4,9 +4,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 
 function Repo() {
-	const { userId, repoId } = useParams();
+	const { user, repo } = useParams();
     const navigate = useNavigate();
-	return (<h1>Repo {repoId} from user {userId}
+	return (<h1>Repo {repo} from user {user}
     <Button onClick={() => navigate('/')}>Vai</Button></h1>);
 }
 
