@@ -14,12 +14,8 @@ function Search() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const loading = useSelector((state) => state.user.loading);
-	const users = useSelector((state) => state.user.users);
-	const totalCount = useSelector((state) => state.user.totalCount);
-	const totalPages = useSelector((state) => state.user.totalPages);
-	const currentPage = useSelector((state) => state.user.currentPage);
-
+	const {loading, users, totalCount, totalPages, currentPage } = useSelector((state) => state.user);
+	
 	const [hasSearches, setHasSearches] = useState(false);
 	const [query, setQuery] = useState('');
 	const [searchedQuery, setSearchedQuery] = useState('');
