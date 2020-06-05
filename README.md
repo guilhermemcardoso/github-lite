@@ -1,5 +1,21 @@
 
-## A aplicação
+# Tabela de conteúdos
+1. [A aplicação](#a-aplicação)
+2. [Scripts](#scripts) 
+	-  [yarn start](#yarn-start)
+	-  [yarn build](#yarn-build)
+	-  [yarn eject](#yarn-eject)
+	-  [yarn predeploy](#yarn-predeploy)
+	-  [yarn deploy](#yarn-deploy)
+3. [Como executar localmente](#como-executar-localmente)
+4. [Informações adicionais sobre as dependências da aplicação](#informações-adicionais-sobre-as-dependências-da-aplicação)
+5. [Informações adicionais sobre as funcionalidades da aplicação](#informações-adicionais-sobre-as-funcionalidades-da-aplicação)
+	- [Endpoints utilizados](#endpoints-utilizados)
+	- [Paginação das listas](#paginação-das-listas)
+	- [Resultados da busca](#resultados-da-busca)
+	- [Ordenação da lista de repositórios](#ordenação-da-lista-de-repositórios)
+
+## A aplicação 
 
 O Github Lite é um projeto criado utilizando a api pública do GitHub e pode ser acessado clicando [aqui](https://guilhermemcardoso.github.io/github-lite/).
 A aplicação é uma web application criada utilizando o [ReactJS](https://reactjs.org/) e é composta pelas seguintes páginas:
