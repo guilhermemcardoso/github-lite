@@ -83,10 +83,10 @@ function User() {
 	};
 
 	const handleSortItems = () => {
-		const newSort = sort === 'desc' ? 'asc' : 'desc';
-		const newList = orderBy(repos, newSort);
+		const sortMethod = {asc: 'desc', desc: 'asc'};
+		const newList = orderBy(repos, sortMethod[sort]);
 		setRepos(newList);
-		setSort(newSort);
+		setSort(sortMethod[sort]);
 	};
 
 	if (loading || !currentUser)
