@@ -1,19 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { SortContainer } from './styles';
-function SortOptions({size, color, ...rest}) {
+import SortIcon from '@material-ui/icons/Sort';
 
-    return (
-       <SortContainer />
-    );
+import * as colors from '../../theme/colors';
+
+function SortOptions({ onClick, ...rest }) {
+	return (
+		<SortContainer onClick={onClick}>
+			<SortIcon style={{ color: colors.darkFont }} />
+		</SortContainer>
+	);
 }
 
 SortOptions.propTypes = {
-    sort: PropTypes.string
-  };
-  
-  SortOptions.defaultProps = {
-    sort: 'asc'
-  };
+	onClick: PropTypes.func,
+};
+
+SortOptions.defaultProps = {};
 
 export default SortOptions;

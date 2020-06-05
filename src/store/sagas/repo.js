@@ -11,6 +11,7 @@ export function* getUserRepos({ payload }) {
 
 	try {
 		const currentUser = yield select((state) => state.repo.currentUser);
+		const isDifferentUser = !currentUser || currentUser.login !== payload.user;
 
 		const requestList = [];
 		requestList.push(
@@ -21,12 +22,16 @@ export function* getUserRepos({ payload }) {
 				},
 			})
 		);
-		if (!currentUser) requestList.push(api.get(`/users/${payload.user}`));
+
+		if (isDifferentUser) requestList.push(api.get(`/users/${payload.user}`));
+			
 		const responseList = yield call(axios.all, requestList);
 
 		const [repoResponse, userResponse] = responseList;
 
-		const pageLinks = repoResponse.headers.link ? repoResponse.headers.link.split(',') : [];
+		const pageLinks = repoResponse.headers.link
+			? repoResponse.headers.link.split(',')
+			: [];
 		const links = pageLinks.map((pageLink) => {
 			let link = pageLink.substring(
 				pageLink.length - 11,
@@ -41,14 +46,12 @@ export function* getUserRepos({ payload }) {
 
 		const repos = orderBy(repoResponse.data, payload.sort);
 
-		console.log('REPOS', repos);
-
 		yield put(
 			Actions.getUserReposSuccess(
 				repos,
 				hasPrevious,
 				hasNext,
-				currentUser ? currentUser : userResponse.data
+				isDifferentUser ? userResponse.data : currentUser
 			)
 		);
 	} catch (err) {

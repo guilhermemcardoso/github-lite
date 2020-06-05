@@ -18,13 +18,13 @@ export function* searchUser({ payload }) {
 		});
 
 		let userRequests = [];
-		data.items.map((item, index) => {
+		data.items.forEach((item, index) => {
 			userRequests.push(api.get(`/users/${data.items[index].login}`));
 		});
 
 		const userResponses = yield call(axios.all, userRequests);
 		const users = [];
-		userResponses.map((response) => {
+		userResponses.forEach((response) => {
 			users.push(response.data);
 		});
 

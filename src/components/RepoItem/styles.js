@@ -38,41 +38,18 @@ export const RepoDescription = styled.p`
 	padding-top: ${dimens.padding_md}px;
 `;
 
-export const UserInfo = styled.div`
+export const DetailsContainer = styled.div`
+	flex-direction: row;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin: ${dimens.margin_md}px 0 0 0;
 	width: 100%;
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	justify-content: space-between;
-	padding-top: ${dimens.padding_md}px;
-`;
-
-export const UserEmail = styled.div`
-	color: ${colors.darkSecondaryFont};
-	font-size: ${dimens.font_content}px;
-`;
-
-export const FollowersContainer = styled.div`
-	color: ${colors.darkFont};
-	font-size: ${dimens.font_details}px;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-`;
-
-export const FollowingContainer = styled.div`
-	color: ${colors.darkFont};
-	font-size: ${dimens.font_details}px;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
 `;
 
 export const Badge = styled.div`
-	background-color: ${colors.accent};
-	color: ${colors.lightFont};
+	border: 1px solid ${colors.darkDivider};
+	color: ${colors.darkSecondaryFont};
 	border-radius: ${dimens.margin_md}px;
 	height: ${dimens.margin_md * 2}px;
 	padding: 0 ${dimens.padding_sm}px;
@@ -82,5 +59,4 @@ export const Badge = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 0 0 0 ${dimens.margin_md}px;
 `;

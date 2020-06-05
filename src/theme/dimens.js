@@ -17,3 +17,6 @@ export const font_details = 12;
 export const font_badge = 10;
 
 export const border_radius = 4;
+
+export const header_height = 50;
+export const marker_size = 12;

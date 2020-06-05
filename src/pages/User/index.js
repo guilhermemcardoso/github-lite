@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Actions } from '../../store/ducks/repo';
 import {
@@ -14,9 +14,18 @@ import {
 	UserName,
 	UserLogin,
 	UserBio,
+	UserCompanyContainer,
+	CompanyIcon,
+	UserCompany,
+	UserLocationContainer,
+	LocationIcon,
+	UserLocation
 } from './styles';
+import { orderBy } from '../../utils/repo';
+import { enableScroll, disableScroll } from '../../utils/scroll';
 
 import RepoList from '../../components/RepoList';
+import RepoDetails from '../../components/RepoDetails';
 import Spinner from '../../components/Spinner';
 import Pagination from '../../components/Pagination';
 import SortOptions from '../../components/SortOptions';
@@ -27,9 +36,8 @@ import * as colors from '../../theme/colors';
 function User() {
 	const { user } = useParams();
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
-	const repos = useSelector((state) => state.repo.repos);
+	const repoList = useSelector((state) => state.repo.repos);
 	const currentUser = useSelector((state) => state.repo.currentUser);
 	const hasPrevious = useSelector((state) => state.repo.hasPrevious);
 	const loading = useSelector((state) => state.repo.loading);
@@ -37,14 +45,19 @@ function User() {
 
 	const [currentPage, setCurrentPage] = useState(1);
 	const [sort, setSort] = useState('desc');
+	const [repos, setRepos] = useState([]);
+	const [showDetails, setShowDetails] = useState(false);
+	const [selectedRepo, setSelectedRepo] = useState();
 
 	useEffect(() => {
-		dispatch(Actions.getUserRepos(user, currentPage, sort));
+			dispatch(Actions.getUserRepos(user, currentPage, sort));
 	}, []);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
-	}, [repos]);
+		const newList = orderBy(repoList, sort);
+		setRepos(newList);
+	}, [repoList]);
 
 	const handlePreviousPage = () => {
 		const page = currentPage - 1;
@@ -59,7 +72,21 @@ function User() {
 	};
 
 	const handleRepoClick = (repo) => {
-		navigate(repo);
+		setSelectedRepo(repo);
+		setShowDetails(true);
+		disableScroll();
+	};
+
+	const handleCloseDetails = () => {
+		setShowDetails(false);
+		enableScroll();
+	};
+
+	const handleSortItems = () => {
+		const newSort = sort === 'desc' ? 'asc' : 'desc';
+		const newList = orderBy(repos, newSort);
+		setRepos(newList);
+		setSort(newSort);
 	};
 
 	if (loading || !currentUser)
@@ -68,6 +95,7 @@ function User() {
 				<Spinner size={dimens.font_subtitle} color={colors.accent} />
 			</SpinnerContainer>
 		);
+
 	return (
 		<MainContainer>
 			<UserContainer>
@@ -78,11 +106,23 @@ function User() {
 					)}
 					<UserLogin>{currentUser.login}</UserLogin>
 					{currentUser.bio && <UserBio>{currentUser.bio}</UserBio>}
+					{currentUser.company && (
+						<UserCompanyContainer>
+							<CompanyIcon fontSize='small' />
+							<UserCompany>{currentUser.company}</UserCompany>
+						</UserCompanyContainer>
+					)}
+					{currentUser.location && (
+						<UserLocationContainer>
+							<LocationIcon fontSize='small' />
+							<UserLocation>{currentUser.location}</UserLocation>
+						</UserLocationContainer>
+					)}
 				</SideContainer>
 				<ContentContainer>
 					<TitleContainer>
 						<Title>Repositórios</Title>
-						<SortOptions />
+						<SortOptions onClick={handleSortItems} />
 					</TitleContainer>
 					<RepoList data={repos} onItemClick={handleRepoClick} />
 				</ContentContainer>
@@ -96,6 +136,11 @@ function User() {
 					clickPrevious={handlePreviousPage}
 				/>
 			)}
+			<RepoDetails 
+				repo={selectedRepo}
+				show={showDetails}
+				onClose={handleCloseDetails}
+			/>
 		</MainContainer>
 	);
 }

@@ -20,8 +20,6 @@ export const Title = styled.h1`
 
 export const SearchContainer = styled(Container)`
     display: flex;
-    margin: auto;
-    margin-top: 50px;
     margin-bottom: 20px;
     flex-direction: column;
     align-items: center;

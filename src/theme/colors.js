@@ -1,5 +1,6 @@
 export const darkBackground = '#24292E';
 export const lightBackground = '#FAFBFC';
+export const transparentDarkBackground = 'rgba(0,0,0,0.7)';
 
 export const primaryLight = '#52F278';
 export const primary = '#28A745';
