@@ -4,14 +4,20 @@ import * as colors from '../../theme/colors';
 import * as dimens from '../../theme/dimens';
 
 export const ButtonContainer = styled.button`
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	background: ${(props) => {
 		if (props.type === 'primary') return colors.primary;
 		return colors.lightBackground;
 	}};
-	border-color: ${colors.primary};
+	border-color: ${(props) => {
+		if (props.type === 'primary') return colors.primary;
+		return colors.darkSecondaryFont;
+	}};
 	color: ${(props) => {
 		if (props.type === 'primary') return colors.lightFont;
-		return colors.primary;
+		return colors.darkSecondaryFont;
 	}};
 	border-style: solid;
 	font-size: ${dimens.font_content}px;
@@ -26,9 +32,9 @@ export const ButtonContainer = styled.button`
 	}};
 	border-width: 2px;
 	border-radius: ${dimens.border_radius}px;
-	-webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
-	box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.75);
 	&:focus {
 		outline: 0;
 	}
@@ -36,12 +42,15 @@ export const ButtonContainer = styled.button`
 		cursor: pointer;
 		background: ${(props) => {
 			if (props.type === 'primary') return colors.primaryDark;
-			return colors.lightBackground;
+			return colors.darkDivider;
 		}};
-		border-color: ${colors.primaryDark};
+		border-color: ${(props) => {
+			if (props.type === 'primary') return colors.primaryDark;
+			return colors.darkFont;
+		}};
 		color: ${(props) => {
 			if (props.type === 'primary') return colors.lightFont;
-			return colors.primaryDark;
+			return colors.darkFont;
 		}};
 	}
 `;

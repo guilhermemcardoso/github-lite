@@ -7,14 +7,16 @@ function Pagination({
 	totalPages,
 	clickNext,
 	clickPrevious,
+	hasPrevious,
+	hasNext,
 	...rest
 }) {
 
 	return (
 		<PaginationContainer {...rest}>
-			{currentPage > 1 && (<Button onClick={clickPrevious}>{'<'}</Button>)}
+			{(currentPage > 1 || hasPrevious) && (<Button onClick={clickPrevious}>{'<'}</Button>)}
 			<CurrentPage>Página {currentPage}</CurrentPage>
-			{currentPage < totalPages && (<Button onClick={clickNext}>{'>'}</Button>)}
+			{(currentPage < totalPages || hasNext) && (<Button onClick={clickNext}>{'>'}</Button>)}
 		</PaginationContainer>
 	);
 }
@@ -24,11 +26,15 @@ Pagination.propTypes = {
 	totalPages: PropTypes.number,
 	clickNext: PropTypes.func,
 	clickPrevious: PropTypes.func,
+	hasPrevious: PropTypes.bool,
+	hasNext: PropTypes.bool
 };
 
 Pagination.defaultProps = {
 	currentPage: 1,
 	totalPages: 1,
+	hasPrevious: false,
+	hasNext: false
 };
 
 export default Pagination;

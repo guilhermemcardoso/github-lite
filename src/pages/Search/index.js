@@ -35,8 +35,8 @@ function Search() {
 		dispatch(Actions.searchUser(query, 1));
 	};
 
-	const handleItemClick = (userId) => {
-		navigate(`users/${userId}`);
+	const handleItemClick = (user) => {
+		navigate(`users/${user}`);
 	};
 
 	const handlePreviousPage = () => {
@@ -49,11 +49,16 @@ function Search() {
 		dispatch(Actions.searchUser(searchedQuery, nextPage));
 	};
 
+	const handleKeyDown = (event) => {
+		if (event.key === 'Enter') handleSearch();
+	};
+
 	return (
 		<SearchContainer>
 			<Logo src={logo} />
 			<Title>GitHub Lite</Title>
 			<SearchInput
+				onKeyDown={handleKeyDown}
 				type='text'
 				value={query}
 				onChange={(e) => setQuery(e.target.value)}
@@ -61,7 +66,7 @@ function Search() {
 			<Button onClick={handleSearch} loading={loading} size='md'>
 				Pesquisar
 			</Button>
-			{hasSearches && (
+			{totalCount > 0 && !loading && (
 				<UserList
 					data={users}
 					totalResults={totalCount}
@@ -71,7 +76,7 @@ function Search() {
 			{totalCount === 0 && hasSearches && !loading && (
 				<NoResults query={searchedQuery} />
 			)}
-			{hasSearches && totalCount > 10 && (
+			{hasSearches && totalCount > 10 && !loading && (
 				<Pagination
 					currentPage={currentPage}
 					totalPages={totalPages}
