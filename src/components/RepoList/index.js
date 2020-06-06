@@ -4,11 +4,7 @@ import PropTypes from 'prop-types';
 
 import RepoItem from '../RepoItem';
 
-function RepoList({
-	data,
-	onItemClick,
-	...rest
-}) {
+function RepoList({ data, onItemClick, ...rest }) {
 	return (
 		<ListContainer {...rest}>
 			{data.map((repo) => (
@@ -24,7 +20,7 @@ RepoList.propTypes = {
 };
 
 RepoList.defaultProps = {
-	data: []
+	data: [],
 };
 
 export default RepoList;

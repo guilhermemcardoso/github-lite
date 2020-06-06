@@ -8,21 +8,27 @@ import Button from '../../components/Button';
 import UserList from '../../components/UserList';
 import NoResults from '../../components/NoResults';
 import Pagination from '../../components/Pagination';
+import MessageModal from '../../components/MessageModal';
 
 function Search() {
 	const logo = require('../../assets/imgs/github.svg');
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const {loading, users, totalCount, totalPages, currentPage } = useSelector((state) => state.user);
+	const {loading, users, totalCount, totalPages, currentPage, hasError, errorMessage } = useSelector((state) => state.user);
 	
 	const [hasSearches, setHasSearches] = useState(false);
+	const [showError, setShowError] = useState(false);
 	const [query, setQuery] = useState('');
 	const [searchedQuery, setSearchedQuery] = useState('');
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [users]);
+
+	useEffect(() => {
+		if(hasError) setShowError(true);
+	}, [hasError]);
 
 	const handleSearch = () => {
 		if (query.length < 1) return;
@@ -47,6 +53,10 @@ function Search() {
 
 	const handleKeyDown = (event) => {
 		if (event.key === 'Enter') handleSearch();
+	};
+
+	const closeErrorModal = () => {
+		setShowError(false);
 	};
 
 	return (
@@ -80,6 +90,11 @@ function Search() {
 					clickPrevious={handlePreviousPage}
 				/>
 			)}
+			<MessageModal 
+				show={showError}
+				message={errorMessage}
+				onClose={closeErrorModal}
+			/>
 		</SearchContainer>
 	);
 }

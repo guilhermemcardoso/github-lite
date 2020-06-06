@@ -23,7 +23,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import * as dimens from '../../theme/dimens';
 
 function RepoDetails({ repo, show, onClose, ...rest }) {
-
 	if (!show) return <></>;
 
 	return (

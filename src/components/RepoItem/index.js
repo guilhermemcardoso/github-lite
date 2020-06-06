@@ -1,5 +1,11 @@
 import React from 'react';
-import { RepoContainer, RepoName, RepoDescription, DetailsContainer, Badge } from './styles';
+import {
+	RepoContainer,
+	RepoName,
+	RepoDescription,
+	DetailsContainer,
+	Badge,
+} from './styles';
 import PropTypes from 'prop-types';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 

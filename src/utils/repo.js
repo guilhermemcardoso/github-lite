@@ -1,4 +1,5 @@
 export const orderBy = (list, sort = 'asc') => {
+	if (!list) return [];
 	let array = [...list];
 	const sortMethod = { asc: 1, desc: -1 };
 

@@ -11,7 +11,8 @@ export function* getUserRepos({ payload }) {
 
 	try {
 		const currentUser = yield select((state) => state.repo.currentUser);
-		const isDifferentUser = !currentUser || currentUser.login !== payload.user;
+		const isDifferentUser =
+			!currentUser || currentUser.login !== payload.user;
 
 		const requestList = [];
 		requestList.push(
@@ -23,8 +24,9 @@ export function* getUserRepos({ payload }) {
 			})
 		);
 
-		if (isDifferentUser) requestList.push(api.get(`/users/${payload.user}`));
-			
+		if (isDifferentUser)
+			requestList.push(api.get(`/users/${payload.user}`));
+
 		const responseList = yield call(axios.all, requestList);
 
 		const [repoResponse, userResponse] = responseList;
@@ -45,7 +47,6 @@ export function* getUserRepos({ payload }) {
 		const hasPrevious = links.findIndex((link) => link === 'prev') > -1;
 
 		const repos = orderBy(repoResponse.data, payload.sort);
-
 		yield put(
 			Actions.getUserReposSuccess(
 				repos,
@@ -56,7 +57,11 @@ export function* getUserRepos({ payload }) {
 		);
 	} catch (err) {
 		console.log(err);
-		yield put(Actions.getUserReposError());
+		yield put(
+			Actions.getUserReposError(
+				'Erro ao tentar recuperar informações do usuário. Tente novamente mais tarde.'
+			)
+		);
 	}
 }
 

@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 function NoResults({ query, ...rest }) {
 	return (
 		<NoResultsContainer {...rest}>
-			<NoResultsTitle>Não foi possível encontrar usuários que correspondam a '{query}'</NoResultsTitle>
+			<NoResultsTitle>
+				Não foi possível encontrar usuários que correspondam a '{query}'
+			</NoResultsTitle>
 		</NoResultsContainer>
 	);
 }

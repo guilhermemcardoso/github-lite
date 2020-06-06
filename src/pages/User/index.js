@@ -19,7 +19,7 @@ import {
 	UserCompany,
 	UserLocationContainer,
 	LocationIcon,
-	UserLocation
+	UserLocation,
 } from './styles';
 import { orderBy } from '../../utils/repo';
 import { enableScroll, disableScroll } from '../../utils/scroll';
@@ -29,6 +29,7 @@ import RepoDetails from '../../components/RepoDetails';
 import Spinner from '../../components/Spinner';
 import Pagination from '../../components/Pagination';
 import SortOptions from '../../components/SortOptions';
+import MessageModal from '../../components/MessageModal';
 
 import * as dimens from '../../theme/dimens';
 import * as colors from '../../theme/colors';
@@ -37,27 +38,36 @@ function User() {
 	const { user } = useParams();
 	const dispatch = useDispatch();
 
-	const repoList = useSelector((state) => state.repo.repos);
-	const currentUser = useSelector((state) => state.repo.currentUser);
-	const hasPrevious = useSelector((state) => state.repo.hasPrevious);
-	const loading = useSelector((state) => state.repo.loading);
-	const hasNext = useSelector((state) => state.repo.hasNext);
+	const {
+		repos,
+		currentUser,
+		hasPrevious,
+		hasNext,
+		loading,
+		hasError,
+		errorMessage,
+	} = useSelector((state) => state.repo);
 
 	const [currentPage, setCurrentPage] = useState(1);
 	const [sort, setSort] = useState('desc');
-	const [repos, setRepos] = useState([]);
+	const [repoList, setRepoList] = useState([]);
 	const [showDetails, setShowDetails] = useState(false);
+	const [showError, setShowError] = useState(false);
 	const [selectedRepo, setSelectedRepo] = useState();
 
 	useEffect(() => {
-			dispatch(Actions.getUserRepos(user, currentPage, sort));
+		dispatch(Actions.getUserRepos(user, currentPage, sort));
 	}, []);
 
 	useEffect(() => {
+		if (hasError) setShowError(true);
+	}, [hasError]);
+
+	useEffect(() => {
 		window.scrollTo(0, 0);
-		const newList = orderBy(repoList, sort);
-		setRepos(newList);
-	}, [repoList]);
+		const newList = orderBy(repos, sort);
+		setRepoList(newList);
+	}, [repos]);
 
 	const handlePreviousPage = () => {
 		const page = currentPage - 1;
@@ -83,11 +93,24 @@ function User() {
 	};
 
 	const handleSortItems = () => {
-		const sortMethod = {asc: 'desc', desc: 'asc'};
-		const newList = orderBy(repos, sortMethod[sort]);
-		setRepos(newList);
+		const sortMethod = { asc: 'desc', desc: 'asc' };
+		const newList = orderBy(repoList, sortMethod[sort]);
+		setRepoList(newList);
 		setSort(sortMethod[sort]);
 	};
+
+	const closeErrorModal = () => {
+		setShowError(false);
+	};
+
+	if (hasError)
+		return (
+			<MessageModal
+				show={showError}
+				message={errorMessage}
+				onClose={closeErrorModal}
+			/>
+		);
 
 	if (loading || !currentUser)
 		return (
@@ -124,7 +147,7 @@ function User() {
 						<Title>Repositórios</Title>
 						<SortOptions onClick={handleSortItems} />
 					</TitleContainer>
-					<RepoList data={repos} onItemClick={handleRepoClick} />
+					<RepoList data={repoList} onItemClick={handleRepoClick} />
 				</ContentContainer>
 			</UserContainer>
 			{(hasPrevious || hasNext) && (
@@ -136,7 +159,7 @@ function User() {
 					clickPrevious={handlePreviousPage}
 				/>
 			)}
-			<RepoDetails 
+			<RepoDetails
 				repo={selectedRepo}
 				show={showDetails}
 				onClose={handleCloseDetails}
