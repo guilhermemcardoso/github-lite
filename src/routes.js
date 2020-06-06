@@ -10,7 +10,7 @@ function MainRoutes() {
 		<Routes>
 			<Route path='github-lite/' element={<Search />} />
 			<Route path='github-lite/users/:user' element={<User />} />
-			<Route path='*' element={<NotFound />} />
+			<Route path='github-lite/*' element={<NotFound />} />
 		</Routes>
 	);
 }
