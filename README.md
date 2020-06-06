@@ -1,4 +1,5 @@
 
+
 # Tabela de conteúdos
 1. [A aplicação](#a-aplicação)
 2. [Scripts](#scripts) 
@@ -10,10 +11,13 @@
 3. [Como executar localmente](#como-executar-localmente)
 4. [Informações adicionais sobre as dependências da aplicação](#informações-adicionais-sobre-as-dependências-da-aplicação)
 5. [Informações adicionais sobre as funcionalidades da aplicação](#informações-adicionais-sobre-as-funcionalidades-da-aplicação)
+	- [Navegação entre telas](#navegação-entre-telas)
 	- [Endpoints utilizados](#endpoints-utilizados)
 	- [Paginação das listas](#paginação-das-listas)
 	- [Resultados da busca](#resultados-da-busca)
 	- [Ordenação da lista de repositórios](#ordenação-da-lista-de-repositórios)
+	- [Tratamento de erros](#tratamento-de-erros)
+	- [Página não encontrada](#página-não-encontrada)
 
 ## A aplicação 
 
@@ -95,6 +99,10 @@ Para desenvolver o projeto, foram utilizadas outras bibliotecas interessantes qu
 
 ## Informações adicionais sobre as funcionalidades da aplicação
 
+### Navegação entre telas
+
+A aplicação utiliza o `BrowserRouter` da biblioteca `react-router` para realizar a navegação entre telas. Porém, a aplicação está hospedada no GitHub pages e é acessada através do endereço do meu GitHub, dentro de uma subpasta, github-lite. Por isso, toda a navegação da aplicação possui como base o caminho `/github-lite/` e não somente `/`.
+
 ### Endpoints utilizados
 
 Apesar de ser uma aplicação pequena e com poucas funcionalidades, foi uma experiência divertida desenvolver o GitHub Lite. 
@@ -133,3 +141,11 @@ Os resultados retornados na busca são salvos na *store* de estados da aplicaç�
 ### Ordenação da lista de repositórios
 
 Os repositórios de um usuário são exibidos através de uma lista e podem ser ordenados de acordo com o número de estrelas que o repositório possui, de forma crescente ou decrescente, podendo a ordenação ser alterada ao clicar no botão no localizado no canto superior direito da página. Porém, essa ordenação é feita a cada página, localmente, pois não existe um meio de ordenar os resultados por número de estrelas utilizando parâmetros na requisição. De acordo com a própria documentação da api do GitHub, que pode ser acessada [neste link](https://developer.github.com/v3/repos/#list-repositories-for-a-user), é possível ordenar a lista de repositórios de um usuário através dos seguintes campos: `created`,  `updated`,  `pushed` ou  `full_name`, sendo `full_name` o campo padrão utilizado.
+
+### Tratamento de erros
+
+Caso as requisições realizadas para a api do GitHub retornem com erro, seja por valores incorretos ou por ter estourado o limite de requisições, uma mensagem é exibida no topo da página. A mensagem possui um texto padrão e um formato simples, sendo removida da tela automaticamente após alguns segundos.
+
+### Página não encontrada
+
+Caso o usuário tente acessar uma págna que não existe dentro da aplicação, uma página padrão será exibida, informando ao usuário que o endereço buscado não foi encontrado. A página também exibe um botão que redireciona o usuário para a página inicial da aplicação.
