@@ -62,9 +62,6 @@ export const UserAvatar = styled.img`
 	max-width: 320px;
 	height: auto;
 	border-radius: ${dimens.border_radius}px;
-	&:hover {
-		cursor: pointer;
-	}
 `;
 
 export const TitleContainer = styled.div`

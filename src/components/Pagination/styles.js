@@ -15,7 +15,7 @@ export const PaginationContainer = styled.div`
 `;
 
 export const CurrentPage = styled.div`
-    background: ${colors.lightBackground};
+	background: ${colors.lightBackground};
 	color: ${colors.darkFont};
 	font-size: ${dimens.font_content}px;
 	margin: 0;
@@ -31,7 +31,7 @@ export const Button = styled.button`
 	margin: 0 ${dimens.margin_sm}px;
 	padding: ${dimens.padding_sm}px ${dimens.padding_md}px;
 	border-width: 1px;
-    border-radius: ${dimens.border_radius}px;
+	border-radius: ${dimens.border_radius}px;
 	-webkit-box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.75);
 	-moz-box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.75);
 	box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.75);

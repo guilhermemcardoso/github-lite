@@ -4,5 +4,5 @@ import * as dimens from '../../theme/dimens';
 
 export const ListContainer = styled.div`
 	width: 100%;
-    margin-top: ${dimens.margin_lg}px;
+	margin-top: ${dimens.margin_lg}px;
 `;

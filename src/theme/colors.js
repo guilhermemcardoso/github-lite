@@ -16,3 +16,5 @@ export const lightFont = '#FFFFFF';
 
 export const lightDivider = '#FAFBFC';
 export const darkDivider = '#C6C7C8';
+
+export const error = '#E57373';

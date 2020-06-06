@@ -3,7 +3,9 @@ const INITIAL_STATE = {
 	users: [],
 	totalCount: 0,
 	totalPages: 0,
-	currentPage: 1
+	currentPage: 1,
+	hasError: false,
+	errorMessage: '',
 };
 
 export const Types = {
@@ -25,15 +27,21 @@ export const Actions = {
 		type: Types.SEARCH_USER_SUCCESS,
 		payload: { users, totalCount, totalPages, currentPage },
 	}),
-	searchUserError: () => ({
+	searchUserError: (message) => ({
 		type: Types.SEARCH_USER_ERROR,
+		payload: { message },
 	}),
 };
 
 export default function (state = INITIAL_STATE, action) {
 	switch (action.type) {
 		case Types.SEARCH_USER_REQUEST:
-			return { ...state, loading: true };
+			return {
+				...state,
+				loading: true,
+				hasError: false,
+				errorMessage: '',
+			};
 		case Types.SEARCH_USER_SUCCESS:
 			return {
 				...state,
@@ -41,10 +49,17 @@ export default function (state = INITIAL_STATE, action) {
 				totalCount: action.payload.totalCount,
 				totalPages: action.payload.totalPages,
 				currentPage: action.payload.currentPage,
+				hasError: false,
+				errorMessage: '',
 				loading: false,
 			};
 		case Types.SEARCH_USER_ERROR:
-			return { ...state, loading: false };
+			return {
+				...state,
+				loading: false,
+				hasError: true,
+				errorMessage: action.payload.message,
+			};
 
 		default:
 			return state;

@@ -38,12 +38,14 @@ export function* searchUser({ payload }) {
 		);
 	} catch (err) {
 		console.log(err);
-		yield put(Actions.searchUserError());
+		yield put(
+			Actions.searchUserError(
+				'Erro ao pesquisar usuários. Tente novamente mais tarde.'
+			)
+		);
 	}
 }
 
 export default function* rootSaga() {
-	yield all([
-		takeLatest(Types.SEARCH_USER_REQUEST, searchUser)
-	]);
+	yield all([takeLatest(Types.SEARCH_USER_REQUEST, searchUser)]);
 }
