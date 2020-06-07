@@ -11,7 +11,7 @@ function NotFound() {
 		<NotFoundContainer>
 			<NotFoundText>Página não encontrada</NotFoundText>
 			<NotFoundImage src={notFound} />
-			<Button type='outline' onClick={() => navigate('/github-lite')}>
+			<Button type='outline' onClick={() => navigate('/')}>
 				Voltar á página inicial
 			</Button>
 		</NotFoundContainer>

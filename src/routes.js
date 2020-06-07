@@ -8,9 +8,9 @@ import NotFound from './pages/NotFound';
 function MainRoutes() {
 	return (
 		<Routes>
-			<Route path='github-lite/' element={<Search />} />
-			<Route path='github-lite/users/:user' element={<User />} />
-			<Route path='github-lite/*' element={<NotFound />} />
+			<Route path='/' element={<Search />} />
+			<Route path='/users/:user' element={<User />} />
+			<Route path='*' element={<NotFound />} />
 		</Routes>
 	);
 }
