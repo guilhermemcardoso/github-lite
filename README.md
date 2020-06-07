@@ -1,5 +1,6 @@
 
 
+
 # Tabela de conteúdos
 1. [A aplicação](#a-aplicação)
 2. [Scripts](#scripts) 
@@ -8,6 +9,7 @@
 	-  [yarn eject](#yarn-eject)
 	-  [yarn predeploy](#yarn-predeploy)
 	-  [yarn deploy](#yarn-deploy)
+	-  [yarn test](#yarn-test)
 3. [Como executar localmente](#como-executar-localmente)
 4. [Informações adicionais sobre as dependências da aplicação](#informações-adicionais-sobre-as-dependências-da-aplicação)
 5. [Informações adicionais sobre as funcionalidades da aplicação](#informações-adicionais-sobre-as-funcionalidades-da-aplicação)
@@ -18,6 +20,7 @@
 	- [Ordenação da lista de repositórios](#ordenação-da-lista-de-repositórios)
 	- [Tratamento de erros](#tratamento-de-erros)
 	- [Página não encontrada](#página-não-encontrada)
+6. [Testes](#testes)
 
 ## A aplicação 
 
@@ -59,6 +62,10 @@ Ejeta a aplicação das configurações criadas pelo [create-react-app](https://
 ### `yarn deploy`
 
 Realiza o deploy da aplicação no *github-pages* utlizando uma branch específica chamada *gh-pages*.
+
+### `yarn test`
+
+Inicializa o menu para execução dos testes da aplicação. Após abrir o menu, digite `a` para rodar todos os testes.
 
 ## Como executar localmente
 
@@ -102,6 +109,9 @@ Para desenvolver o projeto, foram utilizadas outras bibliotecas interessantes qu
 ### Navegação entre telas
 
 A aplicação utiliza o `BrowserRouter` da biblioteca `react-router` para realizar a navegação entre telas. Porém, a aplicação está hospedada no GitHub pages e é acessada através do endereço do meu GitHub, dentro de uma subpasta, github-lite. Por isso, toda a navegação da aplicação possui como base o caminho `/github-lite/` e não somente `/`.
+
+#### OBS: O GitHub pages tem (aparentemente) algumas incompatibilidades com o BrowserRouter e, por isso, não é possível acessar uma URL com parâmetros diretamente pela barra de endereços do browser. 
+#### Ex: [https://guilhermemcardoso.github.io/github-lite/users/guilhermemcardoso](https://guilhermemcardoso.github.io/github-lite/users/guilhermemcardoso) - porém, se procurarmos por este usuário na página de buscas ([https://guilhermemcardoso.github.io/github-lite/](https://guilhermemcardoso.github.io/github-lite/)) e selecionarmos o usuário, a página abrirá normalmente.
 
 ### Endpoints utilizados
 
@@ -149,3 +159,9 @@ Caso as requisições realizadas para a api do GitHub retornem com erro, seja po
 ### Página não encontrada
 
 Caso o usuário tente acessar uma págna que não existe dentro da aplicação, uma página padrão será exibida, informando ao usuário que o endereço buscado não foi encontrado. A página também exibe um botão que redireciona o usuário para a página inicial da aplicação.
+
+## Testes
+
+Foram iniciados os testes da aplicação, porém apenas testes unitários relacionados à função de ordenação da lista de repositórios foram criados. Não possuo muita experiência com desenvolvimento de testes, apenas na época em que trabalhei como *fullstack* e, por isso, desenvolvia testes unitários para os serviços desenvolvidos por mim e pelo time. Desenvolver testes para uma aplicação React que depende, em sua maioria, de ações executadas através do Redux Saga está sendo uma aventura, pois não é simplesmente desenvolver testes unitários, as funcionalidades da aplicação dependem de funções assíncronas, actions, sagas, stores, requisições HTTP, etc.
+
+Tentei seguir alguns links e tutoriais, mas preciso entender um pouco melhor como as ferramentas funcionam para que consiga desenvolver testes para toda a aplicação.
